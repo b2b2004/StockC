@@ -13,14 +13,12 @@ public class HomeController {
     @GetMapping("/")
     public String home(HttpServletRequest request, Model model) {
 
-        // 세션에 회원 데이터가 없으면 home
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "/home";
         }
 
         Member loginMember = (Member) session.getAttribute("loginMember");
-        //세션에 회원 데이터가 없으면 home
         if (loginMember == null) {
             return "home";
         }
