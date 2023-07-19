@@ -20,15 +20,23 @@ public class UserService {
     }
 
     public Member login(Member member){
+        Member member1 = memberRepository.findByLoginId(member.getLoginId()).orElseGet(()->{
+            return new Member();
+        });
 
-        Member member1 = memberRepository.findByLoginId(member.getLoginId());
         if(member1.getPassword().equals(member.getPassword())){
             return member1;
         }else
         {
             return null;
         }
+    }
 
+    public Member findById(String id){
+        Member member = memberRepository.findByLoginId(id).orElseGet(()->{
+            return new Member();
+        });
+        return member;
     }
 
 }
